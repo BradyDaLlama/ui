@@ -1,0 +1,51 @@
+# Publishes @bradydallama/tokens and @bradydallama/ui to GitHub Packages, with no
+# personal tokens involved: GitHub Actions' built-in GITHUB_TOKEN does it.
+#
+# How releasing works (Changesets):
+#   1. With a change, run `npx changeset` and commit the note it writes (which
+#      packages, patch/minor/major, one sentence for the changelog).
+#   2. Pushing to main opens or updates a "Version packages" pull request that
+#      bumps versions and writes the changelogs.
+#   3. Merging that pull request runs this again, which builds and publishes any
+#      package whose version isn't on the registry yet.
+#
+# One-time repository setting: Settings → Actions → General → Workflow
+# permissions → "Allow GitHub Actions to create and approve pull requests".
+
+name: Release
+
+on:
+    push:
+        branches: [main]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+    contents: write # commit the version bumps
+    pull-requests: write # open the "Version packages" pull request
+    packages: write # publish to GitHub Packages
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        env:
+            # The repo's .npmrc reads NPM_TOKEN for npm.pkg.github.com; in CI that's the built-in token.
+            NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version-file: .nvmrc
+                  cache: npm
+
+            - run: npm ci
+
+            - name: Open the version pull request, or publish
+              uses: changesets/action@v1
+              with:
+                  publish: npm run release
+                  title: Version packages
+                  commit: Version packages
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

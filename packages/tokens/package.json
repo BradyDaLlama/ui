@@ -1,0 +1,41 @@
+{
+    "name": "@bradydallama/tokens",
+    "version": "0.1.0",
+    "description": "Design tokens (colors, type, radii, motion) for the bradydallama design system.",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BradyDaLlama/ui.git",
+        "directory": "packages/tokens"
+    },
+    "type": "module",
+    "sideEffects": [
+        "*.css"
+    ],
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        },
+        "./tokens.css": "./dist/tokens.css",
+        "./theme.css": "./dist/theme.css",
+        "./tokens.json": "./dist/tokens.json"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsup src/index.ts --format esm --dts --clean && tsx scripts/build.ts",
+        "typecheck": "tsc --noEmit",
+        "prepublishOnly": "npm run build"
+    },
+    "devDependencies": {
+        "@types/node": "^22",
+        "tsup": "^8.5.1",
+        "tsx": "^4.23.15",
+        "typescript": "^5.9.3"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    }
+}

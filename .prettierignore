@@ -1,0 +1,4 @@
+package-lock.json
+**/dist
+**/.next
+packages/ui/src/icons/icons.json

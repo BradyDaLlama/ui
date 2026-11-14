@@ -1,0 +1,1299 @@
+/*
+ * @bradydallama/ui styles.
+ * Expects the token variables to be present: import "@bradydallama/tokens/tokens.css"
+ * (or "@bradydallama/tokens/theme.css" inside a Tailwind v4 stylesheet) before this file.
+ * Everything lives in the `components` layer so Tailwind utilities can still override it.
+ */
+
+@layer base {
+    /* Text is written in normal case; lowercase is a display choice that can be toggled off. */
+    :root[data-case='lower'],
+    .bd-lowercase {
+        text-transform: lowercase;
+    }
+
+    :root[data-case='lower'] :is(input, textarea, select, [contenteditable='true'], .bd-keep-case),
+    .bd-lowercase :is(input, textarea, select, [contenteditable='true'], .bd-keep-case) {
+        text-transform: none;
+    }
+
+    .bd-body {
+        margin: 0;
+        min-height: 100dvh;
+        font-family: var(--font-display);
+        letter-spacing: -0.05rem;
+        color: var(--color-bubble);
+        background-color: var(--color-bg);
+        background-image: radial-gradient(
+            circle at center,
+            color-mix(in srgb, var(--color-bubble) 8%, transparent) 1.25px,
+            transparent 1.5px
+        );
+        background-size: 1.25rem 1.25rem;
+        background-position: center top;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Checkbox shapes. Pick one with --bd-check-shape: var(--bd-shape-star) on :root. */
+    :root {
+        --bd-check-shape: var(--bd-shape-rounded);
+        --bd-check-strike-shape: var(--bd-shape-star);
+        --bd-shape-square: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Crect%20fill%3D%27black%27%20width%3D%2716%27%20height%3D%2716%27%2F%3E%3C%2Fsvg%3E"), url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Crect%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%273.2%27%20stroke-linejoin%3D%27round%27%20width%3D%2716%27%20height%3D%2716%27%2F%3E%3C%2Fsvg%3E");
+        --bd-shape-rounded: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Crect%20fill%3D%27black%27%20width%3D%2716%27%20height%3D%2716%27%20rx%3D%274.8%27%2F%3E%3C%2Fsvg%3E"), url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Crect%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%273.2%27%20stroke-linejoin%3D%27round%27%20width%3D%2716%27%20height%3D%2716%27%20rx%3D%274.8%27%2F%3E%3C%2Fsvg%3E");
+        --bd-shape-circle: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Ccircle%20fill%3D%27black%27%20cx%3D%278%27%20cy%3D%278%27%20r%3D%278%27%2F%3E%3C%2Fsvg%3E"), url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2016%2016%27%3E%3Ccircle%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%273.2%27%20stroke-linejoin%3D%27round%27%20cx%3D%278%27%20cy%3D%278%27%20r%3D%278%27%2F%3E%3C%2Fsvg%3E");
+        --bd-shape-star: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20fill%3D%27black%27%20d%3D%27M37.43%207.652c6.053-8.87%2019.087-8.87%2025.14%200l6.76%209.905a15.243%2015.243%200%200%200%208.262%206.027L89.06%2026.98c10.27%203.04%2014.298%2015.49%207.769%2024.011l-7.292%209.516a15.346%2015.346%200%200%200-3.155%209.753l.328%2012.003c.295%2010.748-10.25%2018.442-20.34%2014.84L55.105%2093.08a15.179%2015.179%200%200%200-10.212%200l-11.266%204.023c-10.088%203.602-20.634-4.092-20.34-14.84l.33-12.003a15.346%2015.346%200%200%200-3.156-9.753L3.17%2050.99c-6.53-8.522-2.5-20.97%207.77-24.01l11.468-3.396a15.243%2015.243%200%200%200%208.262-6.027l6.76-9.905Z%27%2F%3E%3C%2Fsvg%3E"), url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%2720%27%20stroke-linejoin%3D%27round%27%20d%3D%27M37.43%207.652c6.053-8.87%2019.087-8.87%2025.14%200l6.76%209.905a15.243%2015.243%200%200%200%208.262%206.027L89.06%2026.98c10.27%203.04%2014.298%2015.49%207.769%2024.011l-7.292%209.516a15.346%2015.346%200%200%200-3.155%209.753l.328%2012.003c.295%2010.748-10.25%2018.442-20.34%2014.84L55.105%2093.08a15.179%2015.179%200%200%200-10.212%200l-11.266%204.023c-10.088%203.602-20.634-4.092-20.34-14.84l.33-12.003a15.346%2015.346%200%200%200-3.156-9.753L3.17%2050.99c-6.53-8.522-2.5-20.97%207.77-24.01l11.468-3.396a15.243%2015.243%200%200%200%208.262-6.027l6.76-9.905Z%27%2F%3E%3C%2Fsvg%3E");
+        --bd-shape-sparkle: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2078%2078%27%3E%3Cpath%20fill%3D%27black%27%20d%3D%27M31.7091%205.14288C34.5437%20-1.13326%2043.4563%20-1.13326%2046.2909%205.14288L53.3125%2020.6896C54.1141%2022.4644%2055.5356%2023.8859%2057.3104%2024.6875L72.8571%2031.7091C79.1333%2034.5437%2079.1333%2043.4563%2072.8571%2046.2909L57.3104%2053.3125C55.5356%2054.1141%2054.1141%2055.5356%2053.3125%2057.3104L46.2909%2072.8571C43.4563%2079.1333%2034.5437%2079.1333%2031.7091%2072.8571L24.6875%2057.3104C23.8859%2055.5356%2022.4644%2054.1141%2020.6896%2053.3125L5.14288%2046.2909C-1.13326%2043.4563%20-1.13326%2034.5437%205.14288%2031.7091L20.6896%2024.6875C22.4644%2023.8859%2023.8859%2022.4644%2024.6875%2020.6896L31.7091%205.14288Z%27%2F%3E%3C%2Fsvg%3E"), url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2078%2078%27%3E%3Cpath%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%2715.6%27%20stroke-linejoin%3D%27round%27%20d%3D%27M31.7091%205.14288C34.5437%20-1.13326%2043.4563%20-1.13326%2046.2909%205.14288L53.3125%2020.6896C54.1141%2022.4644%2055.5356%2023.8859%2057.3104%2024.6875L72.8571%2031.7091C79.1333%2034.5437%2079.1333%2043.4563%2072.8571%2046.2909L57.3104%2053.3125C55.5356%2054.1141%2054.1141%2055.5356%2053.3125%2057.3104L46.2909%2072.8571C43.4563%2079.1333%2034.5437%2079.1333%2031.7091%2072.8571L24.6875%2057.3104C23.8859%2055.5356%2022.4644%2054.1141%2020.6896%2053.3125L5.14288%2046.2909C-1.13326%2043.4563%20-1.13326%2034.5437%205.14288%2031.7091L20.6896%2024.6875C22.4644%2023.8859%2023.8859%2022.4644%2024.6875%2020.6896L31.7091%205.14288Z%27%2F%3E%3C%2Fsvg%3E");
+        --bd-shape-heart: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20fill%3D%27black%27%20d%3D%27M72.2%206C63.15%206%2055.05%2010.4%2050%2017.15%2044.95%2010.4%2036.85%206%2027.8%206%2012.45%206%200%2018.5%200%2033.95%200%2039.9.95%2045.4%202.6%2050.5c7.9%2025%2032.25%2039.95%2044.3%2044.05%201.7.6%204.5.6%206.2%200%2012.05-4.1%2036.4-19.05%2044.3-44.05%201.65-5.1%202.6-10.6%202.6-16.55C100%2018.5%2087.55%206%2072.2%206Z%27%2F%3E%3C%2Fsvg%3E"), url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20fill%3D%27none%27%20stroke%3D%27black%27%20stroke-width%3D%2720%27%20stroke-linejoin%3D%27round%27%20d%3D%27M72.2%206C63.15%206%2055.05%2010.4%2050%2017.15%2044.95%2010.4%2036.85%206%2027.8%206%2012.45%206%200%2018.5%200%2033.95%200%2039.9.95%2045.4%202.6%2050.5c7.9%2025%2032.25%2039.95%2044.3%2044.05%201.7.6%204.5.6%206.2%200%2012.05-4.1%2036.4-19.05%2044.3-44.05%201.65-5.1%202.6-10.6%202.6-16.55C100%2018.5%2087.55%206%2072.2%206Z%27%2F%3E%3C%2Fsvg%3E");
+    }
+
+    .bd-sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+}
+
+@layer components {
+    /* ---------------- icon ---------------- */
+    .bd-icon {
+        display: inline-block;
+        flex-shrink: 0;
+        width: var(--size-sm);
+        height: var(--size-sm);
+    }
+    .bd-icon[data-size='xs'] {
+        width: var(--size-xs);
+        height: var(--size-xs);
+    }
+    .bd-icon[data-size='md'] {
+        width: var(--size-md);
+        height: var(--size-md);
+    }
+    .bd-icon[data-size='lg'] {
+        width: var(--size-lg);
+        height: var(--size-lg);
+    }
+    .bd-icon[data-size='xl'] {
+        width: var(--size-xl);
+        height: var(--size-xl);
+    }
+
+    /* ---------------- tooltip ---------------- */
+    .bd-tooltip-anchor {
+        position: relative;
+        display: inline-flex;
+        width: fit-content;
+    }
+
+    .bd-tooltip {
+        position: absolute;
+        z-index: 10;
+        padding: 0.125rem 0.75rem;
+        border: var(--border-outline) solid var(--color-bg);
+        border-radius: var(--radius-pill);
+        background: var(--color-primary);
+        color: var(--color-bg);
+        font-size: var(--text-xs);
+        white-space: nowrap;
+        box-shadow: var(--shadow-sm);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--duration-fast) ease;
+    }
+    .bd-tooltip[data-visible='true'] {
+        opacity: 1;
+    }
+    .bd-tooltip[data-location='top'] {
+        bottom: calc(100% + 0.25rem);
+        left: 50%;
+        translate: -50% 0;
+    }
+    .bd-tooltip[data-location='bottom'] {
+        top: calc(100% + 0.25rem);
+        left: 50%;
+        translate: -50% 0;
+    }
+    .bd-tooltip[data-location='left'] {
+        top: 50%;
+        right: calc(100% + 0.5rem);
+        translate: 0 -50%;
+    }
+    .bd-tooltip[data-location='right'] {
+        top: 50%;
+        left: calc(100% + 0.5rem);
+        translate: 0 -50%;
+    }
+
+    /* ---------------- button ---------------- */
+    .bd-button {
+        /* Surface-aware: peach on navy on dark surfaces, navy with peach ink on light ones. */
+        --button-bg: var(--bd-accent, var(--color-primary));
+        --button-fg: var(--bd-accent-ink, var(--color-bg));
+        --button-border: var(--bd-surface, var(--color-bg));
+        --button-ring: var(--bd-accent, var(--color-primary));
+        --button-outline: var(--bd-accent, var(--color-primary));
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
+        min-height: 2.5rem;
+        padding: 0.375rem 1rem;
+        border: var(--border-outline) solid var(--button-border);
+        border-radius: var(--radius-pill);
+        background: var(--button-bg);
+        color: var(--button-fg);
+        box-shadow: 0 0 0 var(--border-outline) var(--button-ring);
+        /* Feedback: a second outline past the ring that fades in as it thickens. */
+        outline: 0 solid transparent;
+        outline-offset: calc(var(--border-outline));
+        outline-width: var(--border-outline);
+        font: inherit;
+        font-size: var(--text-sm);
+        letter-spacing: inherit;
+        text-transform: inherit;
+        line-height: 1;
+        cursor: pointer;
+        user-select: none;
+        transition:
+            outline-color var(--duration-fast) ease,
+            background-color var(--duration-fast) ease,
+            color var(--duration-fast) ease;
+    }
+    .bd-button[data-size='sm'] {
+        min-height: 2.25rem;
+        padding: 0.25rem 0.875rem;
+        font-size: var(--text-xs);
+    }
+    .bd-button[data-size='lg'] {
+        min-height: 3.25rem;
+        padding: 0.75rem 1.75rem;
+        font-size: var(--text-md);
+    }
+    .bd-button[data-variant='secondary'] {
+        --button-bg: transparent;
+        --button-fg: var(--bd-accent, var(--color-primary));
+        --button-border: var(--bd-accent, var(--color-primary));
+        --button-ring: transparent;
+    }
+    .bd-button[data-variant='ghost'] {
+        --button-bg: transparent;
+        --button-fg: var(--bd-accent, var(--color-primary));
+        --button-border: transparent;
+        --button-ring: transparent;
+    }
+    .bd-button[data-variant='danger'] {
+        --button-bg: var(--color-primary-100);
+        --button-fg: var(--color-bubble);
+        --button-ring: var(--color-primary-100);
+        --button-outline: var(--color-primary-100);
+    }
+    @media (hover: hover) {
+        .bd-button:hover:not(:disabled) {
+            outline-color: var(--button-outline);
+        }
+    }
+    .bd-button:active:not(:disabled) {
+        outline-color: var(--button-outline);
+    }
+    /* Long press (onLongPress): sink in over the hold so it reads as "keep holding". */
+    .bd-button {
+        scale: 1;
+        transition-property: outline-color, background-color, color, scale;
+    }
+    .bd-button[data-pressing] {
+        scale: 0.92;
+        transition: scale 500ms ease-in;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .bd-button[data-pressing] {
+            scale: 1;
+        }
+    }
+    .bd-button:focus-visible {
+        outline-color: var(--color-secondary);
+    }
+    .bd-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .bd-icon-button {
+        aspect-ratio: 1;
+        padding: 0;
+        min-width: 2.75rem;
+    }
+    .bd-icon-button[data-size='sm'] {
+        min-width: 2.25rem;
+        padding: 0;
+    }
+    .bd-icon-button[data-size='lg'] {
+        min-width: 3.25rem;
+        padding: 0;
+    }
+
+    /* ---------------- card ---------------- */
+    .bd-card {
+        padding: 1rem;
+        border: var(--border-outline) solid var(--color-bg);
+        border-radius: var(--radius-card);
+        outline: var(--border-outline) solid var(--color-primary);
+        background: var(--color-bubble);
+        color: var(--color-text);
+        transition:
+            translate var(--duration-base) ease,
+            box-shadow var(--duration-base) ease;
+    }
+    /*
+     * Surfaces. Components read these surface-aware variables (with the dark-page look as each
+     * fallback) instead of raw color tokens, so they flip to contrasting colors on light surfaces:
+     *   --bd-on          text and icons drawn straight on the surface
+     *   --bd-outline     outlines and borders that should read against the surface
+     *   --bd-surface     the surface color itself (gaps between rings, focus borders)
+     *   --bd-accent      the accent fill (primary buttons, checks, selected options)
+     *   --bd-accent-ink  text and icons on the accent fill
+     *   --bd-edge        outer edge for light fills (peach or pink pills, ring labels)
+     *   --bd-track       pill outline and switch track
+     *   --bd-fill        progress fill
+     * Light cards switch automatically. Anything else opts in with data-surface="light" (or the
+     * bd-surface-light class), and data-surface="dark" (or bd-surface-dark) switches back, for
+     * example a dark panel inside a light card. Explicit opt-ins beat the automatic card rule.
+     */
+    :where(.bd-card:not([data-tone='dark'])),
+    .bd-surface-light,
+    [data-surface='light'] {
+        --bd-on: var(--color-bg);
+        --bd-outline: var(--color-bg);
+        --bd-surface: var(--color-bubble);
+        --bd-accent: var(--color-bg);
+        --bd-accent-ink: var(--color-primary);
+        --bd-edge: var(--color-bg);
+        --bd-track: var(--color-bg);
+        --bd-fill: var(--color-primary);
+    }
+    /* `initial` unsets the variable, so every component falls back to its dark-page colors. */
+    :where(.bd-card[data-tone='dark'], .bd-dialog),
+    .bd-surface-dark,
+    [data-surface='dark'] {
+        --bd-on: initial;
+        --bd-outline: initial;
+        --bd-surface: initial;
+        --bd-accent: initial;
+        --bd-accent-ink: initial;
+        --bd-edge: initial;
+        --bd-track: initial;
+        --bd-fill: initial;
+    }
+    .bd-card[data-tone='dark'] {
+        border-color: var(--color-primary);
+        outline-color: var(--color-bg);
+        background: var(--color-bg);
+        color: var(--color-bubble);
+    }
+    .bd-card[data-ring] {
+        outline: var(--border-outline) solid var(--color-primary);
+        outline-offset: 2px;
+    }
+    .bd-card[data-interactive] {
+        cursor: pointer;
+        box-shadow: var(--shadow-sm);
+    }
+    @media (hover: hover) {
+        .bd-card[data-interactive]:hover {
+            translate: 0 -2px;
+            box-shadow: var(--shadow-lg);
+        }
+    }
+    .bd-card[data-interactive]:active {
+        translate: 0 1px;
+        box-shadow: none;
+    }
+
+    /* ---------------- pill / ring label ---------------- */
+    .bd-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.25rem 0.75rem;
+        /* Dark fill, light first outline, then a dark second outline (navy on light cards). */
+        border: var(--border-outline) solid var(--color-bubble);
+        outline: var(--border-outline) solid var(--bd-track, var(--color-bg-3));
+        border-radius: var(--radius-pill);
+        background: var(--color-text);
+        color: var(--color-bubble);
+        font-size: var(--text-xs);
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+    .bd-pill[data-icon-start] {
+        padding-left: 0.25rem;
+    }
+    .bd-pill[data-icon-end] {
+        padding-right: 0.25rem;
+    }
+    .bd-pill[data-tone='primary'] {
+        background: var(--color-primary);
+        outline-color: var(--bd-edge, var(--color-primary));
+        border-color: var(--color-bg);
+        color: var(--color-bg);
+    }
+    .bd-pill[data-tone='secondary'] {
+        background: var(--color-secondary);
+        outline-color: var(--bd-edge, var(--color-secondary));
+        border-color: var(--color-bg);
+        color: var(--color-bg);
+    }
+
+    .bd-ring-label {
+        --ring-dark: var(--color-bg);
+        --ring-light: var(--color-primary);
+
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.25rem 0.25rem 0.25rem 0.75rem;
+        border: calc(var(--border-outline) * 2) solid var(--ring-dark);
+        border-radius: var(--radius-pill);
+        outline: var(--border-outline) solid var(--bd-edge, var(--ring-light));
+        background: var(--ring-light);
+        color: var(--ring-dark);
+        font-size: var(--text-sm);
+        white-space: nowrap;
+    }
+    .bd-ring-label[data-tone='bubble'] {
+        --ring-light: var(--color-bubble);
+    }
+    .bd-ring-label-value {
+        padding: 0.25rem 0.625rem;
+        border-radius: var(--radius-pill);
+        background: var(--ring-dark);
+        color: var(--color-bubble);
+        font-size: var(--text-xs);
+        letter-spacing: 0.05em;
+    }
+
+    /* ---------------- bubble ---------------- */
+    .bd-bubble-wrapper {
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+        isolation: isolate;
+    }
+    .bd-bubble {
+        position: relative;
+        display: block;
+        max-width: 100%;
+        padding: 0.25rem 0.5rem;
+        border: var(--border-outline) solid var(--bubble-outline-1);
+        border-radius: var(--radius-card);
+        background: var(--bubble-bg);
+        color: var(--bubble-text);
+    }
+    .bd-bubble::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        border-radius: var(--radius-bubble);
+        outline: var(--border-outline) solid var(--bubble-outline-2);
+        outline-offset: 2px;
+    }
+    .bd-bubble-content {
+        position: relative;
+        z-index: 2;
+        display: block;
+    }
+    .bd-bubble-content[data-one-line] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .bd-bubble-tail {
+        position: absolute;
+        z-index: 1;
+        color: var(--bubble-bg);
+    }
+    .bd-bubble-tail[data-layer='1'] {
+        z-index: -1;
+        stroke: var(--bubble-outline-1);
+        stroke-width: 18;
+    }
+    .bd-bubble-tail[data-layer='2'] {
+        z-index: -2;
+        stroke: var(--bubble-outline-2);
+        stroke-width: 36;
+    }
+    [data-tail='top-left'] > .bd-bubble-tail {
+        top: -10px;
+        left: 12px;
+        rotate: -90deg;
+    }
+    [data-tail='top-center'] > .bd-bubble-tail {
+        top: -10px;
+        left: 50%;
+        translate: -50% 0;
+        rotate: -90deg;
+    }
+    [data-tail='top-right'] > .bd-bubble-tail {
+        top: -10px;
+        right: 10px;
+        rotate: 90deg;
+    }
+    [data-tail='right-top'] > .bd-bubble-tail {
+        top: 10px;
+        right: -16px;
+    }
+    [data-tail='right-center'] > .bd-bubble-tail {
+        top: 50%;
+        right: -16px;
+        translate: 0 -50%;
+        rotate: 180deg;
+    }
+    [data-tail='right-bottom'] > .bd-bubble-tail {
+        bottom: 10px;
+        right: -16px;
+        rotate: 180deg;
+    }
+    [data-tail='bottom-left'] > .bd-bubble-tail {
+        bottom: -10px;
+        left: 12px;
+        rotate: -90deg;
+    }
+    [data-tail='bottom-center'] > .bd-bubble-tail {
+        bottom: -10px;
+        left: 50%;
+        translate: -50% 0;
+        rotate: -90deg;
+    }
+    [data-tail='bottom-right'] > .bd-bubble-tail {
+        bottom: -10px;
+        right: 12px;
+        rotate: -90deg;
+    }
+    [data-tail='left-top'] > .bd-bubble-tail {
+        top: 10px;
+        left: -16px;
+    }
+    [data-tail='left-center'] > .bd-bubble-tail {
+        top: 50%;
+        left: -16px;
+        translate: 0 -50%;
+        rotate: 180deg;
+    }
+    [data-tail='left-bottom'] > .bd-bubble-tail {
+        bottom: 12px;
+        left: -16px;
+        rotate: 180deg;
+    }
+
+    /* ---------------- input ---------------- */
+    .bd-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.375rem;
+        width: 100%;
+    }
+    .bd-field-label {
+        padding-inline: 1rem;
+        font-size: var(--text-xs);
+        color: var(--bd-on, var(--color-bubble));
+    }
+    .bd-field-hint {
+        padding-inline: 1rem;
+        font-size: var(--text-xxs);
+        opacity: 0.7;
+    }
+    .bd-input-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    .bd-input-icon {
+        position: absolute;
+        left: 1rem;
+        color: var(--color-bg);
+        pointer-events: none;
+    }
+    .bd-input {
+        width: 100%;
+        min-height: 2.75rem;
+        padding: 0.5rem 1rem;
+        /* On light surfaces the field would vanish into the card, so its border turns navy. */
+        border: var(--border-outline) solid var(--bd-outline, var(--color-bubble));
+        border-radius: var(--radius-pill);
+        background: var(--color-bubble);
+        color: var(--color-bg);
+        font: inherit;
+        font-size: var(--text-sm);
+        letter-spacing: inherit;
+        transition:
+            border-color var(--duration-fast) ease,
+            box-shadow var(--duration-fast) ease;
+    }
+    .bd-input[data-has-icon] {
+        padding-left: 2.5rem;
+    }
+    .bd-input::placeholder {
+        color: color-mix(in srgb, var(--color-bg) 50%, transparent);
+    }
+    .bd-input:focus {
+        outline: none;
+        border-color: var(--bd-surface, var(--color-bg));
+        box-shadow: 0 0 0 var(--border-outline) var(--bd-accent, var(--color-primary));
+    }
+
+    /* ---------------- checkbox / switch ---------------- */
+    .bd-check,
+    .bd-switch {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        min-height: 2.75rem;
+        cursor: pointer;
+    }
+    .bd-check-box {
+        /* A shape from the props wins, then the CSS defaults set on :root. */
+        --bd-check-active-shape: var(--bd-check-own-shape, var(--bd-check-shape));
+        position: relative;
+        flex-shrink: 0;
+        width: calc(1rem + 2 * var(--border-outline));
+        height: calc(1rem + 2 * var(--border-outline));
+        color: var(--bd-accent, var(--color-primary));
+        transition: scale var(--duration-fast) var(--ease-elastic);
+    }
+    .bd-check[data-strike] .bd-check-box {
+        --bd-check-active-shape: var(--bd-check-own-shape, var(--bd-check-strike-shape));
+    }
+    .bd-check-box[data-shape='svg'] {
+        width: 1rem;
+        height: 1rem;
+    }
+    .bd-check-input {
+        appearance: none;
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        margin: 0;
+        border-radius: 0.375rem;
+        background: transparent;
+        cursor: pointer;
+    }
+    .bd-check-fill,
+    .bd-check-outline {
+        position: absolute;
+        inset: 0;
+        display: grid;
+    }
+    .bd-check-fill {
+        scale: 0;
+        opacity: 0;
+        transition:
+            scale var(--duration-base) var(--ease-elastic),
+            opacity var(--duration-fast) ease;
+    }
+    /*
+     * CSS shapes: each --bd-shape-* is two mask images, a filled shape and a thick outline.
+     * The fill uses only the first (the second is sized to nothing); the outline intersects
+     * both, which leaves a ring along the inside edge of the shape.
+     */
+    .bd-check-box[data-shape='css'] :is(.bd-check-fill, .bd-check-outline) {
+        background: currentColor;
+        mask-image: var(--bd-check-active-shape);
+        mask-repeat: no-repeat;
+        mask-position: center;
+    }
+    .bd-check-box[data-shape='css'] .bd-check-fill {
+        mask-size: 100% 100%, 0 0;
+        mask-composite: add;
+    }
+    .bd-check-box[data-shape='css'] .bd-check-outline {
+        mask-size: 100% 100%, 100% 100%;
+        mask-composite: intersect;
+    }
+    .bd-check-fill > svg,
+    .bd-check-outline > svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+    }
+    .bd-check-fill :is(path, circle, ellipse, rect, polygon, polyline) {
+        fill: currentColor;
+        stroke: none;
+    }
+    .bd-check-outline :is(path, circle, ellipse, rect, polygon, polyline) {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: var(--border-outline);
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+    }
+    @media (hover: hover) {
+        .bd-check:hover .bd-check-input:not(:checked) ~ .bd-check-fill {
+            scale: 0.5;
+            opacity: 0.5;
+        }
+    }
+    .bd-check-input:checked ~ .bd-check-fill {
+        scale: 1;
+        opacity: 1;
+    }
+    .bd-check-input:focus-visible,
+    .bd-switch-input:focus-visible {
+        outline: var(--border-outline) solid var(--color-secondary);
+        outline-offset: 3px;
+    }
+    .bd-check-label {
+        transition: opacity var(--duration-base) ease;
+    }
+    .bd-check[data-strike]:has(:checked) .bd-check-label {
+        text-decoration: line-through;
+        text-decoration-thickness: 2px;
+        opacity: 0.55;
+    }
+
+    /* Ported from orbt's Toggle: track-colored border plus a cloud outline, and an outlined thumb. */
+    .bd-switch-input {
+        appearance: none;
+        position: relative;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        width: 2.5rem;
+        height: 1.75rem;
+        margin: 0.25rem;
+        border: var(--border-outline) solid var(--color-bg-2);
+        border-radius: var(--radius-pill);
+        outline: var(--border-outline) solid var(--bd-outline, var(--color-bubble));
+        background: var(--bd-track, var(--color-bg));
+        cursor: pointer;
+        transition: background-color var(--duration-base) ease;
+    }
+    .bd-switch-input::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        box-sizing: border-box;
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 3px solid var(--color-bg-2);
+        border-radius: var(--radius-pill);
+        background: var(--color-bubble);
+        transition: translate var(--duration-base) var(--ease-elastic);
+    }
+    .bd-switch-input:checked {
+        background: var(--bd-fill, var(--color-primary));
+    }
+    .bd-switch-input:checked::after {
+        translate: 0.75rem 0;
+    }
+
+    /* ---------------- color picker (free-form, ported from orbt) ---------------- */
+    .bd-color-picker {
+        gap: 0.625rem;
+        min-width: 0;
+    }
+    .bd-color-area {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 3 / 2;
+        max-height: 12rem;
+        border: var(--border-outline) solid var(--bd-outline, var(--color-bubble));
+        border-radius: var(--radius-card);
+        background:
+            linear-gradient(to top, #000, transparent),
+            linear-gradient(to right, #fff, hsl(var(--bd-color-hue) 100% 50%));
+        cursor: crosshair;
+        touch-action: none;
+    }
+    .bd-color-area:focus-visible {
+        outline: var(--border-outline) solid var(--color-secondary);
+        outline-offset: 3px;
+    }
+    .bd-color-thumb {
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        translate: -50% -50%;
+        border: var(--border-outline) solid var(--color-bg);
+        border-radius: var(--radius-pill);
+        background: var(--bd-color-value);
+        box-shadow: 0 0 0 var(--border-outline) var(--color-bubble);
+        pointer-events: none;
+    }
+    .bd-color-bar {
+        --bd-thumb: 1.25rem;
+        position: relative;
+        display: block;
+        height: 1rem;
+        border: var(--border-outline) solid var(--bd-outline, var(--color-bubble));
+        border-radius: var(--radius-pill);
+    }
+    .bd-color-bar[data-kind='hue'] {
+        background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+    }
+    .bd-color-bar[data-kind='alpha'] {
+        background:
+            linear-gradient(to right, rgb(var(--bd-color-rgb) / 0), rgb(var(--bd-color-rgb) / 1)),
+            repeating-conic-gradient(#c8c8c8 0 25%, #fff 0 50%) 0 0 / 8px 8px;
+    }
+    .bd-color-range {
+        appearance: none;
+        position: absolute;
+        inset: -0.375rem 0;
+        z-index: 1;
+        width: 100%;
+        margin: 0;
+        opacity: 0;
+        cursor: pointer;
+        touch-action: none;
+    }
+    .bd-color-range:disabled {
+        cursor: not-allowed;
+    }
+    /* Size the invisible native thumb like the drawn one, so drags line up. */
+    .bd-color-range::-webkit-slider-thumb {
+        appearance: none;
+        width: var(--bd-thumb);
+        height: var(--bd-thumb);
+    }
+    .bd-color-range::-moz-range-thumb {
+        width: var(--bd-thumb);
+        height: var(--bd-thumb);
+        border: 0;
+    }
+    .bd-color-bar-thumb {
+        position: absolute;
+        top: 50%;
+        /* Matches a native thumb: it stays inside the track at both ends. */
+        left: calc(var(--bd-at) * (100% - var(--bd-thumb)));
+        width: var(--bd-thumb);
+        height: var(--bd-thumb);
+        translate: 0 -50%;
+        border: var(--border-outline) solid var(--color-bg);
+        border-radius: var(--radius-pill);
+        box-shadow: 0 0 0 var(--border-outline) var(--color-bubble);
+        pointer-events: none;
+    }
+    .bd-color-bar:has(.bd-color-range:focus-visible) .bd-color-bar-thumb {
+        box-shadow: 0 0 0 var(--border-outline) var(--color-secondary);
+    }
+    .bd-color-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .bd-color-chip {
+        flex-shrink: 0;
+        width: 2rem;
+        height: 2rem;
+        border: var(--border-outline) solid var(--color-bg);
+        border-radius: var(--radius-pill);
+        background: var(--bd-color-value);
+        box-shadow: 0 0 0 var(--border-outline) var(--bd-outline, var(--color-bubble));
+    }
+    .bd-color-field {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        min-width: 0;
+        min-height: 2.25rem;
+        padding-inline: 0.25rem 0.875rem;
+        border: var(--border-outline) solid var(--bd-outline, var(--color-bubble));
+        border-radius: var(--radius-pill);
+        background: var(--color-bubble);
+        color: var(--color-bg);
+    }
+    .bd-color-field:focus-within {
+        border-color: var(--bd-surface, var(--color-bg));
+        box-shadow: 0 0 0 var(--border-outline) var(--bd-accent, var(--color-primary));
+    }
+    .bd-color-format {
+        flex-shrink: 0;
+        min-width: 2.75rem;
+        padding: 0.125rem 0.5rem;
+        border: 0;
+        border-radius: var(--radius-pill);
+        background: var(--color-bg);
+        color: var(--color-primary);
+        font: inherit;
+        font-size: var(--text-xxs);
+        cursor: pointer;
+    }
+    .bd-color-format:focus-visible {
+        outline: var(--border-outline) solid var(--color-secondary);
+        outline-offset: 2px;
+    }
+    .bd-color-text {
+        flex: 1;
+        min-width: 0;
+        padding: 0 0 0 0.5rem;
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: var(--text-xs);
+        letter-spacing: 0;
+        outline: none;
+    }
+    .bd-color-tools {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .bd-color-grid {
+        display: grid;
+        grid-template-columns: repeat(var(--bd-cols), minmax(0, 1fr));
+        overflow: hidden;
+        border: var(--border-outline) solid var(--bd-outline, var(--color-bubble));
+        border-radius: var(--radius-card);
+    }
+    .bd-color-cell {
+        aspect-ratio: 1;
+        min-width: 0;
+        padding: 0;
+        border: 0;
+        cursor: pointer;
+    }
+    .bd-color-cell[aria-current='true'] {
+        position: relative;
+        z-index: 1;
+        border-radius: 0.375rem;
+        box-shadow:
+            inset 0 0 0 var(--border-outline) var(--color-bg),
+            0 0 0 var(--border-outline) var(--color-bubble);
+    }
+    @media (hover: hover) {
+        .bd-color-cell:hover {
+            position: relative;
+            z-index: 2;
+            border-radius: 0.375rem;
+            box-shadow: 0 0 0 var(--border-outline) var(--color-bubble);
+        }
+    }
+    .bd-color-harmonies {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+        gap: 0.5rem 0.75rem;
+        padding-inline: 0.5rem;
+    }
+    .bd-color-harmony {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        font-size: var(--text-xxs);
+    }
+    .bd-color-harmony > div {
+        display: flex;
+        gap: 0.25rem;
+    }
+    .bd-color-dot {
+        width: 1.25rem;
+        height: 1.25rem;
+        padding: 0;
+        border: var(--border-outline) solid var(--color-bg);
+        border-radius: var(--radius-pill);
+        box-shadow: 0 0 0 var(--border-outline) transparent;
+        cursor: pointer;
+        transition: box-shadow var(--duration-fast) ease;
+    }
+    @media (hover: hover) {
+        .bd-color-dot:hover {
+            box-shadow: 0 0 0 var(--border-outline) var(--bd-outline, var(--color-bubble));
+        }
+    }
+    .bd-color-cell:focus-visible,
+    .bd-color-dot:focus-visible {
+        position: relative;
+        z-index: 3;
+        outline: var(--border-outline) solid var(--color-secondary);
+        outline-offset: 2px;
+    }
+
+    /* ---------------- color swatches / icon picker ---------------- */
+    .bd-picker {
+        min-width: 0;
+    }
+    .bd-swatches {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 0.5rem;
+    }
+    .bd-swatch {
+        display: grid;
+        place-items: center;
+        box-sizing: border-box;
+        width: 2.25rem;
+        height: 2.25rem;
+        padding: 0;
+        border: var(--border-outline) solid var(--color-bg);
+        border-radius: var(--radius-pill);
+        background: var(--bd-swatch-fill);
+        color: var(--bd-swatch-ink);
+        /* Same double ring as buttons: a ring of the swatch color, then an outline that grows in. */
+        box-shadow: 0 0 0 var(--border-outline) var(--bd-swatch-fill);
+        outline: 0 solid transparent;
+        outline-offset: var(--border-outline);
+        cursor: pointer;
+        transition:
+            scale var(--duration-base) var(--ease-elastic),
+            outline-color var(--duration-fast) ease;
+    }
+    .bd-swatches[data-size='sm'] {
+        gap: 0.5rem;
+    }
+    .bd-swatches[data-size='sm'] .bd-swatch {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+    .bd-swatch-check {
+        opacity: 0;
+        scale: 0.4;
+        transition:
+            opacity var(--duration-fast) ease,
+            scale var(--duration-base) var(--ease-elastic);
+    }
+    @media (hover: hover) {
+        .bd-swatch:hover:not(:disabled) {
+            outline-width: var(--border-outline);
+            outline-color: color-mix(in srgb, var(--bd-outline, var(--color-bubble)) 50%, transparent);
+        }
+    }
+    .bd-swatch[aria-checked='true'] {
+        scale: 1.12;
+        outline-width: var(--border-outline);
+        outline-color: var(--bd-outline, var(--color-bubble));
+    }
+    .bd-swatch[aria-checked='true'] .bd-swatch-check {
+        opacity: 1;
+        scale: 1;
+    }
+
+    .bd-icon-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(2.75rem, 1fr));
+        gap: 0.25rem;
+        justify-items: center;
+        align-content: start;
+        max-height: var(--bd-picker-height, 12rem);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding: 0.5rem;
+        border: var(--border-outline) solid var(--bd-outline, var(--color-bubble));
+        border-radius: var(--radius-card);
+        scrollbar-width: thin;
+        scrollbar-color: color-mix(in srgb, var(--bd-outline, var(--color-bubble)) 18%, transparent) transparent;
+    }
+    .bd-icon-grid:hover {
+        scrollbar-color: color-mix(in srgb, var(--bd-outline, var(--color-bubble)) 35%, transparent) transparent;
+    }
+    .bd-icon-grid[data-columns] {
+        grid-template-columns: repeat(var(--bd-picker-columns), minmax(0, 1fr));
+    }
+    .bd-icon-option {
+        display: grid;
+        place-items: center;
+        box-sizing: border-box;
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: 0;
+        border: var(--border-outline) solid transparent;
+        border-radius: var(--radius-pill);
+        background: transparent;
+        color: var(--bd-on, var(--color-bubble));
+        box-shadow: 0 0 0 var(--border-outline) transparent;
+        cursor: pointer;
+        transition:
+            background-color var(--duration-fast) ease,
+            color var(--duration-fast) ease,
+            border-color var(--duration-fast) ease,
+            box-shadow var(--duration-fast) ease,
+            scale var(--duration-base) var(--ease-elastic);
+    }
+    @media (hover: hover) {
+        .bd-icon-option:hover:not(:disabled):not([aria-checked='true']) {
+            border-color: color-mix(in srgb, var(--bd-outline, var(--color-bubble)) 50%, transparent);
+        }
+    }
+    .bd-icon-option:active:not(:disabled) {
+        scale: 0.92;
+    }
+    .bd-icon-option[aria-checked='true'] {
+        border-color: var(--color-bg);
+        background: var(--bd-accent, var(--color-primary));
+        color: var(--bd-accent-ink, var(--color-bg));
+        box-shadow: 0 0 0 var(--border-outline) var(--bd-accent, var(--color-primary));
+    }
+    .bd-icon-grid-empty {
+        grid-column: 1 / -1;
+        padding: 1rem;
+        font-size: var(--text-xs);
+        opacity: 0.7;
+    }
+
+    .bd-swatch:focus-visible,
+    .bd-icon-option:focus-visible {
+        outline: var(--border-outline) solid var(--color-secondary);
+        outline-offset: 3px;
+    }
+    .bd-swatch:disabled,
+    .bd-icon-option:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    /* ---------------- progress ---------------- */
+    .bd-ring {
+        position: relative;
+        display: inline-grid;
+        place-items: center;
+    }
+    .bd-ring > svg {
+        position: absolute;
+        inset: 0;
+        rotate: -90deg;
+    }
+    .bd-ring-outline {
+        fill: none;
+        stroke: var(--bd-outline, var(--color-bubble));
+    }
+    .bd-ring-surface {
+        fill: none;
+        stroke: var(--bd-surface, var(--color-bg));
+    }
+    .bd-ring-track {
+        fill: none;
+        stroke: var(--bd-outline, var(--color-bubble));
+    }
+    .bd-ring-fill {
+        fill: none;
+        stroke: var(--progress-color, var(--bd-fill, var(--color-secondary)));
+        stroke-linecap: round;
+        transition: stroke-dashoffset var(--duration-slow) var(--ease-elastic);
+    }
+    .bd-ring-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        line-height: 1.1;
+        text-align: center;
+    }
+
+    .bd-bar {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        height: calc(var(--bar-thickness, 6px) + 8px);
+        padding: 2px;
+        border: var(--border-outline) solid var(--bd-surface, var(--color-bg));
+        border-radius: var(--radius-pill);
+        outline: var(--border-outline) solid var(--bd-outline, var(--color-bubble));
+        background: var(--bd-outline, var(--color-bubble));
+    }
+    .bd-bar-fill {
+        display: block;
+        height: 100%;
+        border-radius: var(--radius-pill);
+        /* An explicit `color` wins, then the surface's fill (primary on light cards), then secondary. */
+        background: var(--progress-color, var(--bd-fill, var(--color-secondary)));
+        clip-path: inset(0 calc((1 - var(--value)) * 100%) 0 0 round var(--radius-pill));
+        transition: clip-path var(--duration-slow) var(--ease-elastic);
+    }
+
+    /* ---------------- spinner ---------------- */
+    .bd-spinner {
+        display: inline-grid;
+        place-items: center;
+        padding: 0.5rem;
+        color: var(--bd-accent, var(--color-primary));
+        transition:
+            opacity var(--duration-slow) ease,
+            max-height var(--duration-slow) ease,
+            padding var(--duration-slow) ease;
+        max-height: 5rem;
+        overflow: hidden;
+    }
+    .bd-spinner .bd-icon {
+        animation: bd-spin 2s linear infinite;
+    }
+    .bd-spinner[data-loading='false'] {
+        opacity: 0;
+        max-height: 0;
+        padding: 0;
+    }
+
+    /* ---------------- clipboard ---------------- */
+    .bd-clipboard {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25rem;
+        border: none;
+        background: none;
+        color: inherit;
+        cursor: pointer;
+    }
+
+    /* ---------------- dialog ---------------- */
+    .bd-dialog {
+        width: min(32rem, calc(100% - 2rem));
+        max-height: calc(100dvh - 4rem);
+        padding: 0;
+        border: var(--border-outline) solid var(--color-primary);
+        border-radius: var(--radius-card);
+        background: var(--color-bg-2);
+        color: var(--color-bubble);
+        box-shadow: var(--shadow-lg);
+        /* A thin, faint scrollbar with no track, a bit stronger while hovered. */
+        scrollbar-width: thin;
+        scrollbar-color: color-mix(in srgb, var(--color-bubble) 18%, transparent) transparent;
+        overscroll-behavior: contain;
+    }
+    .bd-dialog:hover {
+        scrollbar-color: color-mix(in srgb, var(--color-bubble) 35%, transparent) transparent;
+    }
+    .bd-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+    }
+    .bd-dialog[open] {
+        animation: bd-pop-in var(--duration-base) var(--ease-elastic);
+    }
+    .bd-dialog[data-variant='sheet'] {
+        width: 100%;
+        max-width: 40rem;
+        margin: auto auto 0;
+        border-bottom: none;
+        border-radius: var(--radius-card) var(--radius-card) 0 0;
+    }
+    .bd-dialog[data-variant='sheet'][open] {
+        animation: bd-sheet-in var(--duration-base) ease-out;
+    }
+    .bd-dialog-body {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 1.25rem 1.5rem;
+    }
+    .bd-dialog-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    .bd-dialog-title {
+        margin: 0;
+        font-size: var(--text-lg);
+        font-weight: normal;
+        color: var(--color-primary);
+    }
+
+    /* ---------------- motion ---------------- */
+    .bd-animated {
+        display: inline-flex;
+        flex-wrap: wrap;
+    }
+    .bd-animated-word,
+    .bd-animated-char {
+        display: inline-block;
+    }
+    .bd-animated-char {
+        opacity: 0;
+    }
+
+    /* Entrance helpers; pair with stagger(index) for --index / --in-delay. */
+    .bd-in-fade {
+        opacity: 0;
+        animation: bd-fade-down var(--in-duration, 0.2s) ease-in-out forwards;
+        animation-delay: calc(var(--in-delay, 0s) * (1 + var(--index, 0)));
+    }
+    .bd-in-scale {
+        scale: 0;
+        animation: bd-scale-in var(--in-duration, 0.2s) ease-in-out forwards;
+        animation-delay: calc(var(--in-delay, 0s) * (1 + var(--index, 0)));
+    }
+    .bd-in-spin {
+        animation: bd-spin-in var(--in-duration, 0.2s) ease-in-out forwards;
+        animation-delay: calc(var(--in-delay, 0s) * (1 + var(--index, 0)));
+    }
+    .bd-bob {
+        animation: bd-bob 4s ease-in-out infinite;
+    }
+}
+
+@keyframes bd-spin {
+    to {
+        rotate: 360deg;
+    }
+}
+@keyframes bd-fade-down {
+    from {
+        opacity: 0;
+        translate: 0 -8px;
+    }
+    to {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+@keyframes bd-scale-in {
+    to {
+        scale: 1;
+    }
+}
+@keyframes bd-spin-in {
+    from {
+        rotate: -360deg;
+        scale: 0;
+    }
+    to {
+        rotate: 0deg;
+        scale: 1;
+    }
+}
+@keyframes bd-pop-in {
+    from {
+        scale: 0.9;
+        opacity: 0;
+    }
+}
+@keyframes bd-sheet-in {
+    from {
+        translate: 0 100%;
+    }
+}
+@keyframes bd-bob {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+    50% {
+        translate: 0 40%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bd-in-fade,
+    .bd-in-scale,
+    .bd-in-spin,
+    .bd-animated-char {
+        animation: none;
+        opacity: 1;
+        scale: 1;
+    }
+    .bd-bob,
+    .bd-spinner .bd-icon {
+        animation: none;
+    }
+}
+
+/* Keeps overscroll / short pages from flashing white behind .bd-body. */
+@layer base {
+    :root:has(.bd-body) {
+        background: var(--color-bg);
+    }
+}

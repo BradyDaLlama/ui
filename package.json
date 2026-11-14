@@ -1,0 +1,25 @@
+{
+    "name": "bradydallama-ui",
+    "private": true,
+    "packageManager": "npm@10.9.4",
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "build": "turbo build",
+        "dev": "turbo dev",
+        "typecheck": "turbo typecheck",
+        "format": "prettier --write .",
+        "changeset": "changeset",
+        "release": "turbo build && changeset publish"
+    },
+    "devDependencies": {
+        "@changesets/cli": "^3.0.3",
+        "prettier": "^3.6.0",
+        "turbo": "^2.11.10",
+        "typescript": "^5.9.3"
+    },
+    "engines": {
+        "node": ">=20.9.0"
+    }
+}
