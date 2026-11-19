@@ -1,0 +1,55 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet" />
+<link
+    rel="preload"
+    href="https://bradydallama.com/fonts/mini-wakuwaku-maru.otf"
+    as="font"
+    type="font/otf"
+    crossorigin
+/>
+<style>
+    /*
+     * Display face: mini-わくわくマル by miniyama (http://www.mini-design.jp/font/mini-wakuwaku.html).
+     * Its license forbids redistributing the file, so it is never committed here; it loads from
+     * bradydallama.com, which serves it with CORS. It has no kanji, so Zen Maru Gothic covers those.
+     */
+    @font-face {
+        font-family: 'Mini-wakuwaku-maru';
+        src: url('https://bradydallama.com/fonts/mini-wakuwaku-maru.otf') format('opentype');
+        font-weight: normal;
+        font-display: swap;
+    }
+    :root {
+        --bd-font-display:
+            'Mini-wakuwaku-maru', 'Zen Maru Gothic', 'M PLUS Rounded 1c', ui-rounded, system-ui, sans-serif;
+    }
+
+    /* Dark native UI (scrollbars, form controls) to match the navy surface. */
+    html {
+        color-scheme: dark;
+        background-color: var(--color-bg);
+    }
+
+    /* Docs pages: prose sits on solid navy; each story block gets the dotted app surface. */
+    .sbdocs-wrapper {
+        background-color: var(--color-bg) !important;
+        background-image: none !important;
+    }
+    /* Markdown tables: zebra stripes in navy instead of Storybook's light grey. */
+    .sbdocs table tr {
+        background-color: var(--color-bg) !important;
+    }
+    .sbdocs table tr:nth-of-type(2n) {
+        background-color: var(--color-bg-2) !important;
+    }
+    .docs-story {
+        background-color: var(--color-bg) !important;
+        background-image: radial-gradient(
+            circle at center,
+            color-mix(in srgb, var(--color-bubble) 8%, transparent) 1.25px,
+            transparent 1.5px
+        ) !important;
+        background-size: 1.25rem 1.25rem !important;
+    }
+</style>

@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# bradydallama/ui
+
+Outlined, pill-shaped React components with double-ring accents.
+
+| Package                | What                                                            |
+| ---------------------- | --------------------------------------------------------------- |
+| `@bradydallama/tokens` | Colors, type, radii, motion → CSS vars, Tailwind v4 theme, JSON |
+| `@bradydallama/ui`     | React components, icons, and styles                             |
+
+## Using this Storybook
+
+- Every component has a **Docs** page with a live props table generated from its TypeScript types.
+- **Controls** (bottom panel) edit a story's props live.
+- **Accessibility** (bottom panel) runs axe checks on the current story.
+- The **Case** toolbar button turns on the library's optional lowercase display mode.
+
+## Setup
+
+```css
+@import 'tailwindcss';
+@import '@bradydallama/tokens/theme.css';
+@import '@bradydallama/ui/styles.css';
+```
+
+```tsx
+import { Button } from '@bradydallama/ui';
+
+<body className="bd-body">
+    <Button icon="star">Hello</Button>
+</body>;
+```

@@ -1,0 +1,10 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "paths": {
+            "@bradydallama/ui": ["../../packages/ui/src/index.ts"],
+            "@bradydallama/ui/motion": ["../../packages/ui/src/motion/index.ts"]
+        }
+    },
+    "include": ["src", ".storybook"]
+}
