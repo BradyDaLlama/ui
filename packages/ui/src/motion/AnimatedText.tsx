@@ -99,13 +99,7 @@ export const AnimatedText = memo(
         );
 
         return (
-            <AnimatedElement
-                className={className}
-                select="bd-animated-char"
-                from={from}
-                to={to}
-                animateKey={children}
-            >
+            <AnimatedElement className={className} select="bd-animated-char" from={from} to={to} animateKey={children}>
                 <span className="bd-sr-only">{children}</span>
                 <span aria-hidden>{words}</span>
             </AnimatedElement>

@@ -29,9 +29,12 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
  * Adds long-press handling to a button's props when `onLongPress` is set;
  * returns them unchanged otherwise. Hooks run either way (rules of hooks).
  */
-function useLongPressProps(
-    { onLongPress, longPressMs, onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & LongPressProps,
-) {
+function useLongPressProps({
+    onLongPress,
+    longPressMs,
+    onClick,
+    ...props
+}: ButtonHTMLAttributes<HTMLButtonElement> & LongPressProps) {
     const { handlers, pressing } = useLongPress({
         onLongPress: () => onLongPress?.(),
         onTap: (e) => onClick?.(e as MouseEvent<HTMLButtonElement>),

@@ -84,7 +84,9 @@ and a mouse, blocks the browser's own long-press menu and text selection, and vi
 browser allows (Android Chrome).
 
 ```tsx
-<Button onClick={open} onLongPress={edit}>Skincare</Button>
+<Button onClick={open} onLongPress={edit}>
+    Skincare
+</Button>
 ```
 
 For other elements, `useLongPress({ onTap, onLongPress })` returns `{ handlers, pressing }` to spread onto

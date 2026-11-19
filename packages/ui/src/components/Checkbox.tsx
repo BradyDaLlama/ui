@@ -27,7 +27,9 @@ export const Checkbox = forwardRef<HTMLInputElement, ToggleProps & { strike?: bo
         const inputId = id ?? fallbackId;
         const isSvg = shape !== undefined && typeof shape !== 'string';
         const style =
-            typeof shape === 'string' ? ({ '--bd-check-own-shape': `var(--bd-shape-${shape})` } as CSSProperties) : undefined;
+            typeof shape === 'string'
+                ? ({ '--bd-check-own-shape': `var(--bd-shape-${shape})` } as CSSProperties)
+                : undefined;
         return (
             <label htmlFor={inputId} className={cx('bd-check', className)} data-strike={strike || undefined}>
                 <span className="bd-check-box" data-shape={isSvg ? 'svg' : 'css'} style={style}>

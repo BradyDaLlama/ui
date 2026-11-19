@@ -67,7 +67,9 @@ export function parseColor(input: string): Hsv | null {
 
     const num = String.raw`(-?\d*\.?\d+)`;
     const sep = String.raw`\s*[ ,/]\s*`;
-    const rgb = text.match(new RegExp(String.raw`^rgba?\(\s*${num}${sep}${num}${sep}${num}(?:${sep}${num})?\s*\)$`, 'i'));
+    const rgb = text.match(
+        new RegExp(String.raw`^rgba?\(\s*${num}${sep}${num}${sep}${num}(?:${sep}${num})?\s*\)$`, 'i'),
+    );
     if (rgb) {
         const [r, g, b] = [rgb[1], rgb[2], rgb[3]].map(Number);
         const a = rgb[4] !== undefined ? Number(rgb[4]) : 1;
