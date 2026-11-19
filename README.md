@@ -2,6 +2,8 @@
 
 The bradydallama design system: outlined, pill-shaped React components with double-ring accents.
 
+**[Browse every component in Storybook →](https://bradydallama.github.io/ui/)**
+
 | Package                                   | What                                                            |
 | ----------------------------------------- | --------------------------------------------------------------- |
 | [`@bradydallama/tokens`](packages/tokens) | Colors, type, radii, motion → CSS vars, Tailwind v4 theme, JSON |
@@ -15,6 +17,7 @@ Published to GitHub Packages (private for now). See [`packages/ui/README.md`](pa
 npm install
 npm run build
 npm run typecheck
+npm run storybook       # component explorer at http://localhost:6006
 ```
 
 ## Release

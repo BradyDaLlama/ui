@@ -1,0 +1,54 @@
+# Builds the Storybook in apps/storybook and publishes it to GitHub Pages
+# (https://bradydallama.github.io/ui/) on every push to main.
+#
+# One-time repository setting: Settings → Pages → Build and deployment →
+# Source → "GitHub Actions". Pages needs a public repository on a free plan.
+
+name: Storybook
+
+on:
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+# Only the latest push deploys; an in-progress deploy is allowed to finish.
+concurrency:
+    group: pages
+    cancel-in-progress: false
+
+permissions:
+    contents: read
+    pages: write # publish to GitHub Pages
+    id-token: write # prove the deploy came from this workflow
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version-file: .nvmrc
+                  cache: npm
+
+            - run: npm ci
+
+            # Builds the tokens and ui packages first (turbo's ^build), then the static Storybook.
+            - run: npm run build-storybook
+
+            - uses: actions/configure-pages@v6
+
+            - uses: actions/upload-pages-artifact@v5
+              with:
+                  path: apps/storybook/storybook-static
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - id: deployment
+              uses: actions/deploy-pages@v5

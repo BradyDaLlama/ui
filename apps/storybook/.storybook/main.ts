@@ -18,10 +18,9 @@ const config: StorybookConfig = {
         },
         '@storybook/addon-a11y',
     ],
-    // GitHub Pages serves from /<repo>/; set STORYBOOK_BASE=/ui/ when building for it.
+    // Builds use relative URLs, so the static output works from a subpath like GitHub Pages' /ui/.
     viteFinal: (config) =>
         mergeConfig(config, {
-            base: process.env.STORYBOOK_BASE ?? config.base,
             resolve: {
                 alias: [
                     { find: /^@bradydallama\/ui\/motion$/, replacement: `${uiSrc}/motion/index.ts` },
